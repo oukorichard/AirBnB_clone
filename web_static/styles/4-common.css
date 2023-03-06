@@ -1,17 +1,16 @@
 
 .container{
-    max-width: 1000px; 
+    width: 1000px; 
     margin-top: 30px;
     margin-bottom: 30px;
     margin-left: auto;
     margin-right: auto;
-    border: solid 1px #CCCCCC;
     
 }
 .filter{
         height: 70px;
         width: 100%;
-        border: 1px #DDDDDD;
+        border: 1px solid #DDDD;
         border-radius: radius 4px;
         margin-right: auto;
         margin-left: auto;
@@ -25,7 +24,8 @@ button{
     height: 48px;
     width: 20%;
     border-radius: 4px;
-    margin-left: 700px;
+    float: right;
+    margin-right: 20px;
     margin-top: 10px;
     opacity: 100;
 
