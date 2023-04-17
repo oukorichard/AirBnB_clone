@@ -4,13 +4,13 @@
 """ AirBnB Console """
 
 from models.base_model import BaseModel
-from models.user import User
-from models.state import State
-from models.city import City
-from models.amenity import Amenity
-from models.place import Place
-from models.review import Review
-from models import storage
+from models.User import User
+from models.State import State
+from models.City import City
+from models.Amenity import Amenity
+from models.Place import Place
+from models.Review import Review
+from models.engine import file_storage
 import cmd
 import sys
 
@@ -30,7 +30,7 @@ class HBNBCommand(cmd.Cmd):
             print()
         if '.' in line:
             HBNBCommand.__all_117 = 1
-            line = line.replace('.','').replace('(','').replace(')','')
+            line = line.replace('.','').replace('(','').replace(')','') 
             cmd_argv = line.split()
             cmd_argv[0], cmd_argv[1] = cmd_argv[1], cmd_argv[0]
             line = "".join(cmd_argv)
