@@ -1,8 +1,6 @@
 from datetime import datetime
 from uuid import uuid4
-from models.engine import file_storage
-
-
+from __init__ import storage
 class BaseModel():
     """
     BaseModel class defines all attributes and methods for other classes

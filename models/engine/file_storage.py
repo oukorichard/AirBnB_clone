@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 
 """ Module for serializing and deserializing instances to JSON and keeping
 storage of instances
@@ -7,7 +7,7 @@ storage of instances
 import json
 
 
-class FileStorage:
+class FileStorage():
 
     """ Class that stores and loads instances to/from files in JSON format """
 
@@ -36,7 +36,7 @@ class FileStorage:
         """
         deserializes the JSON file to __objects (only if the JSON file
         (__file_path) exists ; otherwise, do nothing. If the file
-        doesn’t exist, no exception should be raised)
+        does not exist, no exception should be raised)
         """
         try:
             with open(FileStorage.__file_path, encoding="utf-8") as myfile:
