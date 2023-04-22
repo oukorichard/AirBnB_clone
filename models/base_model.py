@@ -1,4 +1,4 @@
-
+import models
 from datetime import datetime
 from uuid import uuid4
 
@@ -9,51 +9,45 @@ class BaseModel():
     """
 
     def __init__(self, *args, **kwargs):
-        """constructor"""
 
-        for key, value in kwargs.item():
-            if key == "__class__":
-                continue
+        """
+        *args passes non-key arguments
+        **kwargs passes key/value arguments
 
-            if(key == "created_at"):
-                value = datetime.strptime(value, "%Y-%m-%dT%H:%M%S.%f")
+        """
+        tform = '%Y-%m-%dT%H:%M:%S.%f'
+        self.id = str(uuid4())
+        self.creted_at = datetime.today()
+        self.added_at = datetime.today()
 
-            setattr(self,key,value)
+        if len(kwargs) !=0:
 
-        if "id" not in kwargs.keys():
-            self.id = str(uuid4())
+            for key, value in kwargs.items():
+                if key == "created_at" or value == " added_at":
+                    self.__dict__[key] = datetime.strptime(value, tform)
+                else:
+                    self.__dict__[key] = value
+        else:
+            models.storge.new(self)
 
-        if"created_at" not in kwargs.keys():
-            self.create_at = datetime.now()
-
-        if "update_at" not in kwargs.keys():
-            self.updated_at = datetime.now()
-
-        if len(kwargs) == 0:
-            storage.new(self)
-
-    def __Str__(self):
-    
-    
-        """defines what should be printed for each instances of the class"""
-        st = "[{:S}] ({:S}) {:S}"
-    
     def save(self):
         """
-        Updateds the public instances attr updated_at with current datetime
-
+        updates added_at to current datetime
         """
-        self.update_at = datetime.now()
-        storage.save()
+        self.added_at = datetime.today()
+        models.storage.save()
 
     def to_dict(self):
         """
-        returns a dictionary containing all keys/values of __dict__
-        of instance
+        returns a dictionary containing all keys/values of __dict__ of the instance
         """
-        dcopy =self.__dict__.copy()
-        dcopy['__class__'] = self.__class__.__name__
-        dcopy['created_at'] = self.created_at.isoformat()
-        dcopy['updated_at'] = self.updated_at.iosformat()
-
-        return dcopy
+        rdict = self.__dict__.copy()
+        rdict["created_at"] = self.created_at.isoformat()
+        rdict["updated_at"] = self.updated_at.isoformat()
+        rdict["__class__"] = self.__class__.__name__
+        return rdict
+    
+    def __str__(self):
+        """Return the print/str representation of the BaseModel instance."""
+        clname = self.__class__.__name__
+        return "[{}] ({}) {}".format(clname, self.id, self.__dict__)
